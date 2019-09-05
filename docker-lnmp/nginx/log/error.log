@@ -1,0 +1,27 @@
+2019/09/04 10:11:27 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:29 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:32 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:34 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:36 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:38 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:42 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:11:50 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:03 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:30 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:32 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:35 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:37 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:39 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:41 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:51 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:54 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:56 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:12:58 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:13:00 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:13:03 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:13:07 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:13:14 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:13:28 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:13:54 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:14:46 [emerg] 1#1: "worker_processes" directive is not allowed here in /etc/nginx/conf.d/nginx.conf:2
+2019/09/04 10:16:23 [error] 7#7: *2 open() "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory), client: 172.22.0.1, server: _, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:810", referrer: "http://127.0.0.1:810/"
