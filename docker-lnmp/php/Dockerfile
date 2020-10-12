@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM daocloud.io/php:7.2-fpm-alpine
 
 LABEL maintainer="lestat@lestat.me"
 
