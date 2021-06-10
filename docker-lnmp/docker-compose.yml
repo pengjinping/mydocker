@@ -50,7 +50,7 @@ services:
     restart: always
 
   php:
-    image: ${DOCKER_REGISTRY}php:${PHP_VERSION}
+    image: ${DOCKER_REGISTRY}php${PHP_VERSION}
     container_name: php
     volumes:
       - ${LOCAL_STOARGE_PATH}/www:/var/www/html
