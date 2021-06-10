@@ -3,21 +3,21 @@ weba:
   volumes:
     - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/web1:/usr/share/nginx/html
   expose:
-    - 80
+    - ${HTTP_PORT}
 
 webb:
   image: nginx:${NGINX_VERSION}
   volumes:
     - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/web2:/usr/share/nginx/html
   expose:
-    - 80
+    - ${HTTP_PORT}
 
 webc:
   image: nginx:${NGINX_VERSION}
   volumes:
     - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/web3:/usr/share/nginx/html
   expose:
-    - 80
+    - ${HTTP_PORT}
 
 haproxy:
   image: haproxy
