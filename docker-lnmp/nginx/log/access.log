@@ -1,5 +1,0 @@
-172.22.0.1 - - [04/Sep/2019:10:16:22 +0000] "GET / HTTP/1.1" 200 4 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"
-172.22.0.1 - - [04/Sep/2019:10:16:23 +0000] "GET /favicon.ico HTTP/1.1" 404 571 "http://127.0.0.1:810/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"
-172.22.0.1 - - [04/Sep/2019:10:16:29 +0000] "GET /index.php HTTP/1.1" 200 99860 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"
-172.22.0.1 - - [04/Sep/2019:10:16:42 +0000] "GET /db.php HTTP/1.1" 200 32 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"
-172.22.0.1 - - [04/Sep/2019:10:16:47 +0000] "GET /redis.php HTTP/1.1" 200 22 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36"

@@ -2,20 +2,18 @@ FROM daocloud.io/php:7.2-fpm-alpine
 
 LABEL maintainer="lestat@lestat.me"
 
-### set timezome
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-
 ENV PHPREDIS_VERSION 4.2.0
 # 修改镜像源
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
 
 # 安装依赖,核心扩展,pecl扩展,git
-RUN apk update && apk add --no-cache --virtual .build-deps \
+RUN apk update && apk upgrade \
+    && apk add --no-cache bash bash-doc bash-completion \
+    && apk add --no-cache --virtual .build-deps \
         $PHPIZE_DEPS curl-dev imagemagick-dev libtool \
         libxml2-dev postgresql-dev sqlite-dev libmcrypt-dev \
         freetype-dev libjpeg-turbo-dev libpng-dev \
-    && apk add --no-cache curl git imagemagick mysql-client postgresql-libs \
+    && apk add --no-cache curl git tzdata openrc supervisor imagemagick mysql-client postgresql-libs \
     && pecl install imagick \
     && pecl install mcrypt-1.0.1 \
     && docker-php-ext-enable mcrypt imagick \
@@ -28,7 +26,11 @@ RUN apk update && apk add --no-cache --virtual .build-deps \
     && rm -rf /tmp/pear \
     && docker-php-ext-enable redis swoole
 
-# 安装composer并允许root用户运行
+# 字符编码支持utf-8
+RUN echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && locale-gen
+ENV LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
+
+# 安装composer并允许root用户运行 配置全量镜像
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_NO_INTERACTION=1
 ENV COMPOSER_HOME=/usr/local/share/composer
@@ -38,3 +40,13 @@ RUN mkdir -p /usr/local/share/composer \
 	&& rm -f /tmp/composer-setup.* \
     # 配置composer中国全量镜像
     && composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
+
+#配置supervisor
+COPY supervisor/supervisord.conf /etc/supervisord.conf
+
+# 启动crontab
+ADD ./crontab /etc/cron.d/root
+RUN chmod 0644 /etc/cron.d/root
+
+ENTRYPOINT ["/usr/sbin/crond", "-f", "-c", "/etc/cron.d"]
+ENTRYPOINT ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisord.conf"]

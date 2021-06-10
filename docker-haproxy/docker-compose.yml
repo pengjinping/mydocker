@@ -1,33 +1,39 @@
 weba:
-  image: nginx:1.13.0-alpine
+  image: nginx:${NGINX_VERSION}
   volumes:
-    - ./web1:/usr/share/nginx/html
+    - ${LOCAL_STOARGE_PATH}/www/web1:/usr/share/nginx/html
+  environment:
+    - TZ=${SERVER_TIMEZONE}
   expose:
     - 80
 
 webb:
-  image: nginx:1.13.0-alpine
+  image: nginx:${NGINX_VERSION}
   volumes:
-    - ./web2:/usr/share/nginx/html
+    - ${LOCAL_STOARGE_PATH}/www/web2:/usr/share/nginx/html
+  environment:
+    - TZ=${SERVER_TIMEZONE}
   expose:
     - 80
 
 webc:
-  image: nginx:1.13.0-alpine
+  image: nginx:${NGINX_VERSION}
   volumes:
-    - ./web3:/usr/share/nginx/html
+    - ${LOCAL_STOARGE_PATH}/www/web3:/usr/share/nginx/html
+  environment:
+    - TZ=${SERVER_TIMEZONE}
   expose:
     - 80
 
 haproxy:
   image: haproxy
   volumes:
-    - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
   links:
     - weba
     - webb
     - webc
   ports:
-    - "811:80"
+    - "${HTTP_PORT}:80"
     - "70:70"
 

@@ -1,60 +1,65 @@
 version: '3'
 services:
   nginx:
-    build: ./nginx
+    image: nginx:${NGINX_VERSION}
+    container_name: nginx
     depends_on:
       - php
     ports:
-      - "810:80"
+      - "${HTTP_PORT}:80"
       - "443:443"
     volumes:
-      - ../www:/usr/share/nginx/html
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
-      - ./nginx/log:/var/log/nginx
+      - ${LOCAL_STOARGE_PATH}/www:/usr/share/nginx/html
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/nginx/conf.d:/etc/nginx/conf.d
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ${LOCAL_STOARGE_PATH}/log:/var/log/nginx
+    environment:
+      - TZ=${SERVER_TIMEZONE}
     networks:
       - frontend
     restart: always
-    container_name: nginx
 
-  php:
-    build: ./php
+  redis:
+    image: redis:${REDIS_VERSION}
+    container_name: redis
     volumes:
-      - ../www:/var/www/html
-      - ./php/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/redis/redis.conf/:/usr/local/etc/redis.conf
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/redis/data:/usr/local/redis/data
+      - ${LOCAL_STOARGE_PATH}/log/redis.log:/usr/local/redis/redis.log
+    command:
+      redis-server
     networks:
-      - frontend
       - backend
     restart: always
-    container_name: php
 
   mysql:
-    image: mysql:5.7
+    image: mysql:${MYSQL_VERSION}
+    container_name: mysql
     ports:
       - "3306:3306"
     volumes:
-      - ./mysql/data:/var/lib/mysql
-      - ./mysql/my.cnf:/etc/my.cnf
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/mysql/data:/var/lib/mysql
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/mysql/my.cnf:/etc/my.cnf
     environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=test
+      - TZ=${SERVER_TIMEZONE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     networks:
       - backend
     restart: always
-    container_name: mysql
 
-  redis:
-    image: redis:3.2-alpine
-    container_name: redis
+  php:
+    image: ${DOCKER_REGISTRY}php:${PHP_VERSION}
+    container_name: php
     volumes:
-      - ./redis/redis.conf/:/usr/local/etc/redis.conf
-      - ./redis/data:/usr/local/redis/data
-      - ./redis/redis.log:/usr/local/redis/redis.log
-    command:
-      redis-server
+      - ${LOCAL_STOARGE_PATH}/www:/var/www/html
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/php/php-fpm.d:/usr/local/etc/php-fpm.d
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/dockerfile/supervisor/supervisord.conf:/etc/supervisord.conf
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/dockerfile/supervisor/conf:/etc/supervisor.d
+      - ${LOCAL_STOARGE_PATH}/log/supervisor:/var/log
     networks:
+      - frontend
       - backend
     restart: always
 

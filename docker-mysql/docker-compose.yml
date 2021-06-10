@@ -1,35 +1,36 @@
 version: '2'
 services:
   mysql-master:
-    build: ./mysql-master
+    image: ${DOCKER_REGISTRY}mysql-master:${PHP_VERSION}
+    container_name: mysql-master
     ports:
       - "33065:3306"
     volumes:
-      - ./mysql-master/data:/var/lib/mysql
-      - ./mysql-master/my.cnf:/etc/my.cnf
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/mysql-master/data:/var/lib/mysql
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/mysql-master/my.cnf:/etc/my.cnf
     environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=test
+      - TZ=${SERVER_TIMEZONE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     links:
       - mysql-slave
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
-    container_name: mysql-master
     hostname: mysql-master
 
   mysql-slave:
-    image: mysql:5.7
+    image: mysql:${MYSQL_VERSION}
+    container_name: mysql-slave
     ports:
       - "33066:3306"
     volumes:
-      - ./mysql-slave/data:/var/lib/mysql
-      - ./mysql-slave/my.cnf:/etc/my.cnf
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/mysql-slave/data:/var/lib/mysql
+      - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/mysql-slave/my.cnf:/etc/my.cnf
     environment:
-      - TZ=Asia/Shanghai
-      - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=test
+      - TZ=${SERVER_TIMEZONE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
     command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     restart: always
-    container_name: mysql-slave
+
     hostname: mysql-slave
