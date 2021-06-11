@@ -9,7 +9,7 @@ services:
       - "${HTTP_PORT}:80"
       - "443:443"
     volumes:
-      - ${LOCAL_STOARGE_PATH}/www:/usr/share/nginx/html
+      - ${LOCAL_STOARGE_PATH}/www:/var/www/html
       - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/nginx/conf.d:/etc/nginx/conf.d
       - ${LOCAL_STOARGE_PATH}/docker-${APP_NAME}/nginx/nginx.conf:/etc/nginx/nginx.conf
       - ${LOCAL_STOARGE_PATH}/log:/var/log/nginx
